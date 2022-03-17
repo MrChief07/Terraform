@@ -19,13 +19,13 @@ data "azurerm_subscription" "current" {}
 
 data "azurerm_resource_group" "rgrp" {
 
-  name = "Test_rg"
+  name = var.resource_group_name
 
 }
 
 data "azurerm_container_registry" "main" {
 
-  name                          = "npdcontainerregistry"
+  name                          = "containerregistryname"
 
   resource_group_name           = data.azurerm_resource_group.rgrp.name
 
@@ -33,12 +33,13 @@ data "azurerm_container_registry" "main" {
 
 data "azurerm_virtual_network" "vnet01" {
 
-  name                = "securitytesting"
+  name                = var.virtual_network_name
 
   resource_group_name = data.azurerm_resource_group.rgrp.name
 
 }
 
+#For existing subnets who has "enforce_private_link_endpoint_network_policies" enabled we can create a container registry with no problem
 data "azurerm_subnet" "subnets" {
 
   for_each             = var.subnets
@@ -50,7 +51,8 @@ data "azurerm_subnet" "subnets" {
 
 }
 
-/*
+#I need to enable enforce_private_link_endpoint_network_policies for existing subnets but instead of updating it  this below block trying to create new subnet can some one help regaing these issue
+/* 
 resource "azurerm_subnet" "updatesubnet" {
 for_each             = var.subnets
   name                 = each.value.name
