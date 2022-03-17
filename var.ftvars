@@ -1,0 +1,31 @@
+subnets= {
+
+"subnet1"= {
+
+    name = "default1"
+
+    privateendpoint="privateendpointtest"
+
+    serviceconnectname = "scname"
+    
+    dnsname = "private1.azurecr.io"
+    
+    vnetlinkname = "vnetlink1"
+
+  },
+
+ "subnet2"={
+
+    name = "default"
+
+    privateendpoint="privateendpointtest2"
+
+    serviceconnectname = "connect1"
+
+    dnsname = "private2.azurecr.io"
+
+    vnetlinkname = "vnetlink2"
+
+  }
+
+}
